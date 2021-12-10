@@ -1,42 +1,39 @@
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Conexaobd{
-    private Conexaobd conexao;
+    protected Connection connection;
     
     public Conexaobd(){
-        this.conexao = null;
+        this.connection = null;
     }
-    private void setConexaobd (Conexaobd conexao){
-        this.conexao = conexao;
+    private void setConnection (Connection connection){
+        this.connection = connection;
     }
-    public Conexaobd getConexaobd(){
-        return this.conexao;
+    public Connection getConnection(){
+        return this.connection;
     }
     
-    public boolean openconexao(){
+    public boolean openconnection(){
         try{
-            conexao = DriverManager.getConexaobd("jdbc:sqlite:/hospital.db");
-            this.setConexaobd(conexao);
+            connection = DriverManager.getConnection("jdbc:sqlite:hospital.db");
+            this.setConnection(connection);
             return true;
         }catch(SQLException e){
             return false;
         }
     }
-    public boolean closeconexao(){
+    public boolean closeconnection(){
         try{
-            if(this.getConexaobd() != null){
-                this.getConexaobd().close();
+            if(this.getConnection() != null)
+                this.getConnection().close();
                 return true;
-            }
+            
         }catch(SQLException e){
             return false;
         }
+        
     }
-    }
+}
     
 

@@ -1,7 +1,7 @@
 import java.sql.*;
-public class Paciente extends Conexaobd{
+public class Medicamento extends Conexaobd{
     private String nome;
-    public Paciente(String nome){
+    public Medicamento(String nome){
         this.nome = nome;
     }
     public void setnome(String nome){
@@ -10,48 +10,47 @@ public class Paciente extends Conexaobd{
     public String getnome(){
         return this.nome;
     }
-
-    public boolean insertPaciente(){
+    public boolean insertMedicamento(){
         try{
             Statement statement = this.connection.createStatement();
-            statement.executeUpdate("INSERT INTO Paciente (nomePaciente) VALUES('"+this.nome+"')");
+            statement.executeUpdate("INSERT INTO Medicamento(nomeMedicamento) VALUES('"+this.nome+"')");
             return true;
         }catch(SQLException e){
-            System.out.println(e);
             return false;
         }
     }
-    public boolean deletePaciente(int id){
+    public boolean deleteMedicamento(int cod){
         try{
             Statement statement = this.connection.createStatement();
-            statement.executeUpdate("DELETE FROM Paciente WHERE idPaciente = "+id);
+            statement.executeUpdate("DELETE FROM Medicamento WHERE codMedicamento = "+cod);
             return true;
         }catch(SQLException e){
             return false;
-        }       
+        }        
     }
-    public boolean updatePaciente(int id,String nome){
+        public boolean updatePaciente(int cod,String nome){
         try{
             Statement statement = this.connection.createStatement();
-            statement.executeUpdate("UPDATE Paciente SET nomePaciente = '"+nome+"' WHERE idPaciente = "+id);
+            statement.executeUpdate("UPDATE Paciente SET nomeMedicamento = '"+nome+"' WHERE codMedicamento = "+cod);
             return true;
         }catch(SQLException e){
             System.out.println(e);
             return false;
         }  
     }
-    public boolean selectPaciente(int id){
+    public boolean selectPaciente(int cod){
         try{
             Statement statement = this.connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Paciente WHERE idPaciente = "+id);
+            ResultSet rs = statement.executeQuery("SELECT * FROM Medicamento WHERE codMedicamento = "+cod);
             while(rs.next()){
-                Integer idPaciente = rs.getInt("idPaciente");
-                String nome = rs.getString("nomePaciente");
-                System.out.println(id+" - "+nome);
+                Integer codigo = rs.getInt("codMedicamento");
+                String nome = rs.getString("nomeMedicamento");
+                System.out.println(codigo+" - "+nome);
             }
             return true;
         }catch(SQLException e){
             return false;
         }
     }
+
 }
