@@ -31,7 +31,7 @@ public class Medicamento extends Conexaobd{
         public boolean updatePaciente(int cod,String nome){
         try{
             Statement statement = this.connection.createStatement();
-            statement.executeUpdate("UPDATE Paciente SET nomeMedicamento = '"+nome+"' WHERE codMedicamento = "+cod);
+            statement.executeUpdate("UPDATE Medicamento SET nomeMedicamento = '"+nome+"' WHERE codMedicamento = "+cod);
             return true;
         }catch(SQLException e){
             System.out.println(e);

@@ -17,7 +17,7 @@ public class Medico extends Conexaobd{
             return true;
         }catch(SQLException e){
             return false;
-            }
+        }
     }
     public boolean deleteMedico(int id){
         try{
@@ -26,7 +26,31 @@ public class Medico extends Conexaobd{
             return true;
         }catch(SQLException e){
             return false;
-            }        
+        }        
+    }
+        public boolean updatePaciente(int id,String nome){
+        try{
+            Statement statement = this.connection.createStatement();
+            statement.executeUpdate("UPDATE Medico SET nomeMedico = '"+nome+"' WHERE idMedico = "+id);
+            return true;
+        }catch(SQLException e){
+            System.out.println(e);
+            return false;
+        }  
+    }
+    public boolean selectPaciente(int id){
+        try{
+            Statement statement = this.connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Medico WHERE idMedico = "+id);
+            while(rs.next()){
+                Integer idMedico = rs.getInt("idMedico");
+                String nome = rs.getString("nomeMedico");
+                System.out.println(idMedico+" - "+nome);
+            }
+            return true;
+        }catch(SQLException e){
+            return false;
+        }
     }
 }
     
