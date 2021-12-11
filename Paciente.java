@@ -54,4 +54,20 @@ public class Paciente extends Conexaobd{
             return false;
         }
     }
+    public boolean insertpacientes(Paciente[] x){ 
+        // creio que aqui ele faz a inserção do vetor inteito no banco de dado
+        // independente do tamanho do vetor porém para no primeiro erro de inserção e printa o erro.
+        for(Paciente i:x){
+            if(i != null){
+                        try{
+                            Statement statement = this.connection.createStatement();
+                            statement.executeUpdate("INSERT INTO Paciente (nomePaciente) VALUES('"+i.nome+"')");
+                            }catch(SQLException e){
+                            System.out.println(e);
+                            return false;
+                        }
+                }  
+        }
+        return true;
+    }
 }
