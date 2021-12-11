@@ -13,9 +13,10 @@ public class Medico extends Conexaobd{
     public boolean insertMedico(){
         try{
             Statement statement = this.connection.createStatement();
-            statement.executeUpdate("INSERT INTO Medico VALUES('"+this.nome+"')");
+            statement.executeUpdate("INSERT INTO Medico (nomeMedico) VALUES('"+this.nome+"')");
             return true;
         }catch(SQLException e){
+            System.out.println(e);
             return false;
         }
     }
