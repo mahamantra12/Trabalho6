@@ -54,6 +54,22 @@ public class Paciente extends Conexaobd{
             return false;
         }
     }
+        public boolean selectLike(String like){ 
+            // método pra ultima questão com sucesso consegue mostrar todos elementos que possuem a determinada String.
+        try{
+            Statement statement = this.connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Paciente WHERE nomePaciente LIKE '%"+like+"%'");
+            System.out.println("Nomes que possuem "+like+":");
+            while(rs.next()){
+                Integer idPaciente = rs.getInt("idPaciente");
+                String nome = rs.getString("nomePaciente");
+                System.out.println(idPaciente+" - "+nome);
+            }
+            return true;
+        }catch(SQLException e){
+            return false;
+        }
+    }
     public boolean insertpacientes(Paciente[] x){ 
         // creio que aqui ele faz a inserção do vetor inteito no banco de dado
         // independente do tamanho do vetor porém para no primeiro erro de inserção e printa o erro.
